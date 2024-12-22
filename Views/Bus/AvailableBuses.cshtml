@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BusTicketBookingSystem.Models.Route>
+
+<h2>Available Buses</h2>
+
+<table>
+    <tr>
+        <th>Bus Name</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Price</th>
+        <th>Seats Available</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var route in Model)
+    {
+        <tr>
+            <td>@route.Bus.Name</td>
+            <td>@route.DepartureTime</td>
+            <td>@route.ArrivalTime</td>
+            <td>@route.Price</td>
+            <td>
+                @foreach (var seat in route.Bus.Seats)
+                {
+                    if (seat.IsAvailable)
+                    {
+                        <p>Seat @seat.Id</p>
+                    }
+                }
+            </td>
+            <td><button>Book Ticket</button></td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,132 @@
+﻿@model BusTicketBookingSystem.Models.SearchBus
+
+@* @{
+    ViewData["Title"] = "Home";
+}
+ *@
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>@ViewData["Title"]</title>
+</head> *@
+
+@* <body> *@
+    @* <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">Bus Booking System</a>
+            <div>
+                <a class="nav-link d-inline" href="/Bus/SearchBus">Home</a>
+                @if (string.IsNullOrEmpty(Context.Session.GetString("UserId")))
+                {
+                    <a class="nav-link d-inline" href="/Account/Login">Login</a>
+                    <a class="nav-link d-inline" href="/Account/Register">Register</a>
+                }
+                else
+                {
+                    <a class="nav-link d-inline" href="/Account/Logout">Logout</a>
+                    <a class="nav-link d-inline" href="/Order/OrderHistory">Order History</a>
+                }
+                
+            </div>
+        </div>
+    </nav> *@
+
+    <div class="container">
+        <div class="search-section mx-auto">
+            <h2 class="text-center mb-4">Find Your Next Trip!</h2>
+            <form asp-action="SearchBus" method="post">
+                <div class="mb-3">
+                    <label for="source" class="form-label">Source</label>
+                    <input type="text" class="form-control" id="source" placeholder="Enter Source City" name="Source" asp-for="Source" required>
+                </div>
+                <div class="mb-3">
+                    <label for="destination" class="form-label">Destination</label>
+                    <input type="text" class="form-control" id="destination" placeholder="Enter Destination City" name="Destination" asp-for="Destination" required>
+                </div>
+                <div class="mb-3">
+                    <label for="travelDate" class="form-label">Travel Date</label>
+                    <input type="date" class="form-control" id="travelDate" name="TravelDate" asp-for="TravelDate" required>
+                </div>
+                <button type="submit" class="btn btn-search w-100">Search</button>
+            </form>
+        </div>
+    </div>
+
+   @*  <footer class="footer">
+        <p>© 2024 Bus Booking System. All Rights Reserved.</p>
+    </footer> *@
+
+@* </body> *@
+@* </html> *@
+
+@* <div class="container bus-home-container">
+    <h2>Search Buses</h2>
+    <form asp-action="SearchBus" method="post">
+        <div class="form-group">
+            <label for="source">Source</label>
+            <input type="text" class="form-control" id="source" name="Source" asp-for="Source" required>
+        </div>
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" class="form-control" id="destination" name="Destination" asp-for="Destination" required>
+        </div>
+        <div class="form-group">
+            <label for="travelDate">Travel Date</label>
+            <input type="date" class="form-control" id="travelDate" name="TravelDate" asp-for="TravelDate" required>
+        </div>
+        <button type="submit" class="btn btn-primary search-bus-btn">Search</button>
+    </form>
+</div> *@
+
+<style type="text/css">
+    .search-bus-btn {
+        margin-top: 20px;
+    }
+
+    .bus-home-container {
+        width: 50%;
+    }
+    /* Custom Styles */
+    body {
+        background-color: #f8f9fa; /* Light gray background */
+    }
+
+    .navbar {
+        background-color: #0d6efd; /* Dark blue */
+    }
+
+        .navbar a {
+            color: white !important;
+            text-decoration: none;
+        }
+
+    .search-section {
+        margin-top: 50px;
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-search {
+        background-color: orange;
+        color: white;
+        font-weight: bold;
+    }
+
+        .btn-search:hover {
+            background-color: darkorange;
+        }
+
+    /* .footer {
+        margin-top: 50px;
+        padding: 10px 0;
+        background-color: #0d6efd;
+        color: white;
+        text-align: center;
+        display:  none;
+    } */
+</style>

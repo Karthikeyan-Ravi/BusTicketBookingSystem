@@ -1,0 +1,122 @@
+﻿@model List<Route>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5 search-results-container">
+        <h2 class="mb-4">Search Results</h2>
+        <div class="row">
+            @if (!Model.Any())
+            {
+                <p class="text-center">No buses available for the selected route.</p>
+            }
+            else
+            {
+                foreach (var route in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="bus-card">
+                            <h5>@route.Bus.Name</h5>
+                            <p>
+                                <strong>From:</strong> @route.Bus.Source <br />
+                                <strong>To:</strong> @route.Bus.Destination <br />
+                                <strong>Departure:</strong> @route.DepartureTime.ToString("g") <br />
+                                <strong>Arrival Time:</strong> @route.ArrivalTime <br />
+                                <strong>Price:</strong> @route.Price
+                            </p>
+                            <form asp-action="ViewSeats" method="post">
+                                <input type="hidden" name="busId" value="@route.Bus.Id" />
+                                <button type="submit" class="btn view-seats-btn w-100">View Seats</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Light gray */
+    }
+
+    .bus-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        background-color: #fff;
+    }
+
+    .view-seats-btn {
+        background-color: #0d6efd;
+        color: white;
+        font-weight: bold;
+    }
+
+        .view-seats-btn:hover {
+            background-color: #0b5ed7;
+        }
+
+        .search-results-container
+        {
+            margin-top: 0px !important;
+        }   
+</style>
+
+
+@* <div class="container">
+    <h2>Search Results</h2>
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Bus Name</th>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var route in Model)
+                {
+                    <tr>
+                        <td>@route.Bus.Name</td>
+                        <td>@route.DepartureLocation</td>
+                        <td>@route.ArrivalLocation</td>
+                        <td>@route.DepartureTime</td>
+                        <td>@route.ArrivalTime</td>
+                        <td>@route.Price</td>
+                        <td>
+                            <a asp-action="ViewSeats" asp-route-busId="@route.Bus.Id" class="btn btn-primary">View Seats</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No buses found for the selected route and date.</p>
+    }
+</div>
+ *@

@@ -1,0 +1,148 @@
+﻿@model BusTicketBookingSystem.Models.Login
+
+@* <h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <input asp-for="RememberMe" type="checkbox" />
+        <label asp-for="RememberMe">Remember me</label>
+    </div>
+
+    <button type="submit">Login</button>
+
+    <!-- Display general model errors -->
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="color: red;">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+</form> *@
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .login-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .form-text {
+        text-align: center;
+    }
+
+        .form-text a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+            .form-text a:hover {
+                text-decoration: underline;
+            }
+
+    .error-div{
+        color: red;
+        margin: 10px 10px 10px 100px;
+        display: inline-block;
+    }
+    .error-div-p{
+        margin: 0 !important;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>Login</h2>
+            </div>
+            <form method="POST" action="/Account/Login">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           name="email"
+                           placeholder="Enter your email"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           placeholder="Enter your password"
+                           required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <div class="form-text mt-3">
+                    Don't have an account? <a href="/Account/Register">Register here</a>
+                </div>
+                <!-- Display general model errors -->
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="error-div">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <p class="error-div-p">@error.ErrorMessage</p>
+                        }
+                    </div>
+                }
+                </form>
+            </div>
+        </div>
+    </body>
+    </html>
+

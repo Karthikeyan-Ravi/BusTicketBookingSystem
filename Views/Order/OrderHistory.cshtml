@@ -1,0 +1,88 @@
+﻿@model List<OrderHistoryViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .history-container {
+            margin: 50px auto;
+            max-width: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .history-header h2 {
+                font-size: 24px;
+                font-weight: bold;
+                color: #343a40;
+            }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .btn-view {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="history-container">
+            <div class="history-header">
+                <h2>Order History</h2>
+                <p>View your previous bookings below.</p>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Bus Name</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Travel Date</th>
+                        <th>Seats</th>
+                        @* <th>Total</th>
+                        <th>Action</th> *@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.BookingId</td>
+                            <td>@order.BusName</td>
+                            <td>@order.</td>
+                            <td>@order.Destination</td>
+                            <td>@order.TravelDate.ToString("dd MMM yyyy")</td>
+                            <td>@order.Seats</td>
+                            @* <td>$@order.TotalAmount</td> *@
+                            @* <td>
+                                <a href="/Order/Details/@order.BookingId" class="btn btn-primary btn-view">View</a>
+                            </td> *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

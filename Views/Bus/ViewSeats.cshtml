@@ -1,0 +1,179 @@
+﻿@model SeatAvailability
+@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Seats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <form class="container" asp-action="BookSeats" method="post">
+        <input type="hidden" name="BusId" value="@Model.BusId" />
+        <div class="container mt-5">
+            <!-- Bus Details -->
+            <div class="bus-details">
+                <h4>Bus Name: @Model.BusName</h4>
+                @*  <p>
+                    <strong>From:</strong> New York <br>
+                    <strong>To:</strong> Washington <br>
+                    <strong>Departure Time:</strong> 10:00 AM
+                </p> *@
+            </div>
+            <div>
+                <h5>Select Your Seat(s):</h5>
+                <div class="seat-grid">
+                    <!-- Example Seats -->
+                    @foreach (var seat in Model.Seats)
+                    {
+                        if (seat.IsAvailable)
+                        {
+                            <div class="seat">
+                                <input type="checkbox" name="SelectedSeatNumbers" value="@seat.SeatNumber" />
+                                Seat @seat.SeatNumber
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="seat seat-booked">
+                                <span>Seat @seat.SeatNumber</span>
+                            </div>
+                        }
+                    }
+                </div>
+                <div>
+                    <div class="summary mt-4">
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("UserId")))
+                        {
+                            <button type="submit" class="btn btn-primary proceed-btn">Book Selected Seats</button>
+                        }
+                        else
+                        {
+                            <a class="btn btn-secondary proceed-btn" href="/Account/Login">Login to Book</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+@* <form class="container" asp-action="BookSeats" method="post">
+    <h2>Seat Availability for @Model.BusName</h2>
+    <input type="hidden" name="BusId" value="@Model.BusId" />
+    <div class="seat-layout">
+        @foreach (var seat in Model.Seats)
+        {
+            if (seat.IsAvailable)
+            {
+                <label>
+                    <input type="checkbox" name="SelectedSeatNumbers" value="@seat.SeatNumber" />
+                    Seat @seat.SeatNumber
+                </label>
+                @* <button class="btn btn-success seat-button">Seat @seat.SeatNumber</button> 
+            }
+            else
+            {
+                <span class="booked-seat">Seat @seat.SeatNumber (Booked)</span>
+            }
+        }
+    </div>
+    <div>
+        @if (!string.IsNullOrEmpty(Context.Session.GetString("UserId")))
+        {
+            <button type="submit" class="btn btn-primary">Book Selected Seats</button>
+        }
+        else
+        {
+            <a class="btn btn-secondary" href="/Account/Login">Login to Book</a>
+        }
+    </div>  </form> *@
+<style>
+    .seat-layout {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Adjust columns for seat layout */
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .seat-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .bus-details {
+        margin-bottom: 20px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .seat-grid {
+        /* display: grid; */
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 10px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+
+    .seat {
+        /* width: 50px; */
+        margin-left: 15px;
+        margin-top: 10px;
+        margin-right: 7px;
+        margin-bottom: 7px;
+        width: 7%;
+        align-content: space-around;
+        display: inline-flex !important;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        background-color: #e7f4e4; /* Available seats: Green */
+        cursor: pointer;
+    }
+
+        .seat-booked {
+            background-color: #ccc; /* Booked seats: Gray */
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background-color: #0d6efd; /* Selected seats: Blue */
+            color: white;
+        }
+
+    .summary {
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 17%;
+    }
+
+    .proceed-btn {
+        background-color: #0d6efd;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+    }
+
+        .proceed-btn:hover {
+            background-color: #0b5ed7;
+        }
+</style>

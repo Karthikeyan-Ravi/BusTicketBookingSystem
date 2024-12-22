@@ -1,0 +1,88 @@
+﻿@model BookingConfirmation
+
+@* <div class="container">
+    <h2>Booking Confirmation</h2>
+    <p><strong>Booking ID:</strong> @Model.BookingId</p>
+    <p><strong>Bus Name:</strong> @Model.BusName</p>
+    <p><strong>Source:</strong> @Model.BusDetails.Source</p>
+    <p><strong>Destination:</strong> @Model.BusDetails.Destination</p>
+    <p><strong>Departure Time:</strong> @Model.BusDetails.DepartureTime</p>
+    <p><strong>Seats:</strong> @string.Join(", ", Model.SeatNumbers)</p>
+    <p><strong>Booking Date:</strong> @Model.BookingDate.ToString("g")</p>
+</div> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="confirmation-container">
+            <div class="confirmation-header">
+                <h2>Booking Confirmed!</h2>
+                <p>Your ticket has been successfully booked.</p>
+            </div>
+            <div class="confirmation-details">
+                <p><span class="details-label">Booking ID:</span>@Model.BookingId</p>
+                <p><span class="details-label">Bus Name:</span>@Model.BusName</p>
+                <p><span class="details-label">Source:</span>@Model.BusDetails.Source</p>
+                <p><span class="details-label">Destination:</span>@Model.BusDetails.Destination</p>
+                <p><span class="details-label">Travel Date:</span>@Model.BusDetails.DepartureTime.Date</p>
+                <p><span class="details-label">Departure Time:</span>@Model.BusDetails.DepartureTime</p>
+                <p><span class="details-label">Seats:</span> @string.Join(", ", Model.SeatNumbers)</p>
+                @* <p><span class="details-label">Total Amount:</span> $50</p> *@
+            </div>
+            <button class="btn btn-primary" onclick="window.print()">Print Ticket</button>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .confirmation-container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .confirmation-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .confirmation-header h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+    .confirmation-details {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #495057;
+    }
+
+    .details-label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+</style>
