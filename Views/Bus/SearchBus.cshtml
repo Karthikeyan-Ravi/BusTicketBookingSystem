@@ -12,28 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <title>@ViewData["Title"]</title>
 </head> *@
-
-@* <body> *@
-    @* <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">Bus Booking System</a>
-            <div>
-                <a class="nav-link d-inline" href="/Bus/SearchBus">Home</a>
-                @if (string.IsNullOrEmpty(Context.Session.GetString("UserId")))
-                {
-                    <a class="nav-link d-inline" href="/Account/Login">Login</a>
-                    <a class="nav-link d-inline" href="/Account/Register">Register</a>
-                }
-                else
-                {
-                    <a class="nav-link d-inline" href="/Account/Logout">Logout</a>
-                    <a class="nav-link d-inline" href="/Order/OrderHistory">Order History</a>
-                }
-                
-            </div>
-        </div>
-    </nav> *@
-
+<script type="text/javascript">
+    // var today = new Date();
+    // console.log(today);
+    //document.getElementById('travelDate').value =  "<?php echo date("Y-m-d"); ?>";
+</script>
+<body>
     <div class="container">
         <div class="search-section mx-auto">
             <h2 class="text-center mb-4">Find Your Next Trip!</h2>
@@ -48,39 +32,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="travelDate" class="form-label">Travel Date</label>
-                    <input type="date" class="form-control" id="travelDate" name="TravelDate" asp-for="TravelDate" required>
+                <input type="date" class="form-control" id="travelDate" value='<?php echo date(" Y-m-d"); ?>' name="TravelDate" asp-for="TravelDate" required>
                 </div>
                 <button type="submit" class="btn btn-search w-100">Search</button>
             </form>
         </div>
     </div>
-
-   @*  <footer class="footer">
-        <p>© 2024 Bus Booking System. All Rights Reserved.</p>
-    </footer> *@
-
-@* </body> *@
-@* </html> *@
-
-@* <div class="container bus-home-container">
-    <h2>Search Buses</h2>
-    <form asp-action="SearchBus" method="post">
-        <div class="form-group">
-            <label for="source">Source</label>
-            <input type="text" class="form-control" id="source" name="Source" asp-for="Source" required>
-        </div>
-        <div class="form-group">
-            <label for="destination">Destination</label>
-            <input type="text" class="form-control" id="destination" name="Destination" asp-for="Destination" required>
-        </div>
-        <div class="form-group">
-            <label for="travelDate">Travel Date</label>
-            <input type="date" class="form-control" id="travelDate" name="TravelDate" asp-for="TravelDate" required>
-        </div>
-        <button type="submit" class="btn btn-primary search-bus-btn">Search</button>
-    </form>
-</div> *@
-
+</body>
 <style type="text/css">
     .search-bus-btn {
         margin-top: 20px;
