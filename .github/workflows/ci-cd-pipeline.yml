@@ -29,6 +29,7 @@ jobs:
         # - name: Run Tests
         #   run:  dotnet test --no-build --verbosity normal
 
+
         - name: Publish the application
           run: dotnet publish BusTicketBookingSystem.csproj --configuration Release --output ./publish
 
