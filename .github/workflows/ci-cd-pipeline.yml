@@ -33,7 +33,7 @@ jobs:
           run: dotnet publish BusTicketBookingSystem.csproj --configuration Release --output ./publish
 
         - name: Build Docker Image
-          run: docker build -t karthikravi11/busticketapp:v2
+          run: docker build -t karthikravi11/busticketapp:v1 .
 
 
         - name: Login to DockerHub
@@ -43,7 +43,7 @@ jobs:
             password: ${{ secrets.DOCKER_PASSWORD }}
 
         - name: Push Docker Image to DockerHub
-          run: docker push karthikravi11/busticketapp:v2
+          run: docker push karthikravi11/busticketapp:v1
 
         - name: Deploy to EC2 via SSH
           uses: appleboy/ssh-action@v0.1.10
@@ -54,5 +54,5 @@ jobs:
             script: |
               docker stop busticketapp || true
               docker rm busticketapp || true
-              docker pull karthikravi11/busticketapp:v2
-              docker run -d --name busticketapp -p 80:8080 karthikravi11/busticketapp:v2
+              docker pull karthikravi11/busticketapp:v1
+              docker run -d --name busticketapp -p 80:8080 karthikravi11/busticketapp:v1
