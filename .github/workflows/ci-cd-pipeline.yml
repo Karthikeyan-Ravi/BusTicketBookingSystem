@@ -33,7 +33,7 @@ jobs:
           run: dotnet publish BusTicketBookingSystem.csproj --configuration Release --output ./publish
 
         - name: Build Docker Image
-          run: docker build -t karthikravi11/busticketapp:v2
+          run: docker build -t karthikravi11/busticketapp:v2 .
 
 
         - name: Login to DockerHub
